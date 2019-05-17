@@ -1,63 +1,85 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Dashboard from '../Dashboard/Dashboard'
 
 import './Form.css'
 
 class Form extends Component {
-    constructor() {
-    super()
-    this.state = {
-        input: "",
-        edit: false
+    constructor(props) {
+        super(props)
+        this.state = {
+            allCurrentProducts: []
+        }
     }
-}
-handleInput = (database) => {
-    this.setState({
-        input: product.target.value
-    })
-}
 
-savedInput = () => {
-    const { id } = this.props.database
-    const { input } = this.state
-    this.props.handleUpdatedProduct(id, input);
-    this.setState({
-        input: ""
-    })
-}
+    componentDidMount() {
+        this.handleGetProducts()
+    }
 
-deleteInput = () => {
-    const { id } = this.props.database
-    const { input } = this.state
-    this.props.handleDeletedProduct(id, input);
-}
+    handleGetProducts = () => {
+        axios.get('/api/products').then(res => {
+            this.setState({
+                allCurrentProducts: res.data
+            })
+        })
+    }
 
-    render() {
+    handleNewProduct = (name, price, img) => {
+        axios.post(`/api/addproduct`, { name: name, price: price, img: img }).then(res => {
+            this.setState({
+                allCurrentProducts: res.data
+            })
+        })
+        .catch(err => alert(err));
+    }
+
+    handleUpdatedProduct = (id, name, price, img) => {
+        axios.put(`/api/product/${id}`, { name: name, price: price, img: img }).then(res => {
+            this.setState({
+                allCurrentProducts: res.data
+            })
+        })
+        .catch(err => alert(err));
+    }
+
+    handleDeletedProduct = (id, name, price, img) => {
+        axios.put(`/api/product/${id}`, { name: name, price: price, img: img }).then(res => {
+            this.setState({
+                allCurrentProducts: res.data
+            })
+        })
+        .catch(err => alert(err));
+    }
 
 
-        return (
-            <div>
-                <div className="form">
-                    <div className="box-uploader">
-                        <img src="https://cdn0.iconfinder.com/data/icons/interface-10/128/_add_image-512.png">
-                        </img>
-                        <p>Image URL:</p>
-                        <input 
-                            placeholder='image url' />
-                        <p>Product Name:</p>
-                        <input 
-                            placeholder='product name' />
-                        <p>Price</p>
-                        <input 
-                            placeholder='price' />
+        render() {
+            const Product = this.state.allCurrentProducts.map((products) => <Dashboard products={products} handleNewProduct={this.handleNewProduct} />)
+
+
+            return (
+                <div>
+                    <div className="form">
+                        <div className="box-uploader">
+                            <img src="https://cdn0.iconfinder.com/data/icons/interface-10/128/_add_image-512.png">
+                            </img>
+                            <p>Image URL:</p>
+                            <input
+                                placeholder='image url' />
+                            <p>Product Name:</p>
+                            <input
+                                placeholder='product name' />
+                            <p>Price</p>
+                            <input
+                                placeholder='price' />
+                        </div>
+
+
                     </div>
-
-
+                    <button onClick={this.handleCancel} disabled={this.state.edit}>Cancel</button>
+                    <button onClick={this.handleNewProduct} disabled={this.state.edit}>Add to inventory</button>
                 </div>
-                <button onClick={this.savedInput} disabled={this.state.edit}>Cancel</button>
-                <button onClick={this.deleteInput} disabled={this.state.edit}>Add to inventory</button>
-            </div>
-        )
+            )
+        }
     }
-}
 
-export default Form;
+    export default Form;
