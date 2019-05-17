@@ -7,6 +7,9 @@ const { SERVER_PORT, CONNECTION_STRING } = process.env
 
 app.use(express.json())
 
+
+
+
 massive(CONNECTION_STRING).then((database) => {
     app.set('db', database)
     console.log('Database 👌!')

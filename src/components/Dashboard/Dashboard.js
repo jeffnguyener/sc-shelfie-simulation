@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import Product from '../Product/Product';
 
+import './Dashboard.css'
 
 class Dashboard extends Component {
     render() {
-        
+
 
 
         return (
-            <div>Dashboard
-            { Product }
+            <div>
+                <header className="header"></header>
+                <span className="shelfie">Shelfie</span>
+                {Product}
             </div>
         )
     }
