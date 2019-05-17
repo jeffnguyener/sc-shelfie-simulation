@@ -12,9 +12,11 @@ class Dashboard extends Component {
 
     }
 
-    
-    render() {
 
+
+
+    render() {
+const Product = this.state.allCurrentProducts.map((products) => 
 
 
         return (

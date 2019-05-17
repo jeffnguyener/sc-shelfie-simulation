@@ -53,8 +53,7 @@ class Form extends Component {
 
 
         render() {
-            const Product = this.state.allCurrentProducts.map((products) => <Dashboard products={products} handleNewProduct={this.handleNewProduct} />)
-
+         <Dashboard products={products} handleNewProduct={this.handleNewProduct} />)
 
             return (
                 <div>
