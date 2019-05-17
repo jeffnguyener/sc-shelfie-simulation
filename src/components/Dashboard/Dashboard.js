@@ -10,9 +10,15 @@ class Dashboard extends Component {
 
         return (
             <div>
-                <header className="header"></header>
-                <span className="shelfie">Shelfie</span>
-                {Product}
+                <div className="Dash">
+
+                    <div className="box1">
+                        <div className="inner-box1"></div>
+                    </div>
+                    <div className="box2"></div>
+                    <div className="box3"></div>
+                    {Product}
+                 </div>
             </div>
         )
     }

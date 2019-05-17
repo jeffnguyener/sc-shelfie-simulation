@@ -1,0 +1,38 @@
+.Dash {
+    display: flex;
+	flex-direction: column;
+}
+
+
+
+.box1 {
+    width: 500px;
+    height: 40vh;
+    border-radius: 10px;
+    margin-top: 160px;
+    margin-left: 35px;
+    background: #d34735;
+}
+
+.inner-box1 {
+
+}
+
+.box2 {
+    width: 500px;
+    height: 40vh;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 35px;
+    background: #d34735;
+}
+
+.box3 {
+    width: 500px;
+    height: 40vh;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 35px;
+    background: #d34735;
+
+}
